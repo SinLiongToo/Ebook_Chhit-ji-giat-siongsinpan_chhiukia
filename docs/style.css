@@ -1,0 +1,329 @@
+@font-face {
+    font-family: 'Iansui';
+    src: url('https://cdn.jsdelivr.net/gh/ButTaiwan/iansui@main/Iansui-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Force robust system fonts for ALL Latin characters and POJ special symbols (ⁿ, o͘, diacritics) */
+@font-face {
+    font-family: 'POJ-Fallback';
+    src: local('-apple-system'), local('Roboto'), local('Segoe UI'), local('Arial'), local('Helvetica Neue');
+    /* Covers Basic Latin, Latin-1, Latin Extended A/B, Combining Diacritics, and Superscripts/Subscripts */
+    unicode-range: U+0020-007F, U+00A0-024F, U+0300-036F, U+2070-209F;
+}
+
+:root {
+    --bg-color: #2c3e50;
+    --text-color: #ffffff;
+    --accent-color: #3498db;
+    --font-zh: 'POJ-Fallback', 'Iansui', 'Klee One', 'Noto Serif TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-en: 'POJ-Fallback', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --sidebar-width: 250px;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-zh);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    height: 100vh;
+    overflow: hidden;
+    /* Prevent body scroll */
+}
+
+/* App Layout */
+.app-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--bg-color);
+    color: white;
+    height: 100%;
+    overflow-y: auto;
+    flex-shrink: 0;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+.sidebar-header {
+    padding: 0 20px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-bottom: 1px solid #444;
+    font-family: var(--font-zh);
+    color: #ecf0f1;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #34495e;
+    font-family: var(--font-zh);
+    transition: background 0.2s;
+}
+
+.nav-item:hover {
+    background: #34495e;
+}
+
+.nav-item.active {
+    background: #1abc9c;
+    color: white;
+}
+
+/* Main Content Area */
+.content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 40px;
+    background: var(--bg-color);
+    box-sizing: border-box;
+}
+
+.book-section {
+    display: none;
+    /* Hide by default */
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.book-section.active {
+    display: block;
+    /* Show active */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-zh);
+    color: var(--accent-color);
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+/* Center Romanized subtitle immediately following title */
+h1+p {
+    text-align: center;
+    font-style: italic;
+    color: #cccccc;
+    margin-bottom: 2em;
+}
+
+p {
+    margin-bottom: 1em;
+    text-align: justify;
+}
+
+.book-image {
+    display: block;
+    max-width: 100%;
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Parallel Text Layout (Side by Side) */
+.parallel-container {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.stanza-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+    /* Ensure top alignment */
+    /* Increased gap for better reading */
+    margin-bottom: 30px;
+    border-bottom: 1px solid #34495e;
+    padding-bottom: 20px;
+}
+
+.stanza-row:last-child {
+    border-bottom: none;
+}
+
+.stanza-col {
+    word-wrap: break-word;
+}
+
+.stanza-col:first-child {
+    font-family: var(--font-zh);
+    font-size: 1.15em;
+    line-height: 1.8;
+}
+
+.stanza-col:last-child {
+    font-family: var(--font-zh);
+    /* Use Iansui */
+    /* Romanized text styling */
+    color: #cccccc;
+    font-size: 1.15em;
+    /* Match Chinese font size */
+    line-height: 1.8;
+    /* Match Chinese line height */
+}
+
+/* Mobile Header & Overlay (Hidden on Desktop) */
+.mobile-header {
+    display: none;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #34495e;
+    margin-bottom: 20px;
+}
+
+.menu-toggle {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    font-family: var(--font-zh);
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.open {
+    display: block;
+    opacity: 1;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .app-container {
+        display: block;
+    }
+
+    .mobile-header {
+        display: block;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        /* Hide off-screen */
+        top: 0;
+        width: 250px;
+        height: 100vh;
+        z-index: 200;
+        transition: left 0.3s ease-in-out;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .content {
+        height: 100vh;
+        padding: 20px;
+        /* Smaller padding on mobile */
+    }
+
+    .stanza-row {
+        grid-template-columns: 1fr;
+        /* Stack on mobile */
+        gap: 10px;
+        /* Reduced gap */
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    .theme-toggle {
+        top: 15px !important;
+        right: 15px !important;
+        padding: 8px 12px !important;
+        font-size: 0.9em;
+    }
+
+    .stanza-col:first-child {
+        font-size: 1.1em;
+        line-height: 1.6;
+    }
+
+    .stanza-col:last-child {
+        font-size: 1.1em;
+        line-height: 1.6;
+    }
+}
+
+/* Table Styling for Publication List */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+}
+
+th,
+td {
+    border: 1px solid #444;
+    /* Thicker border */
+    padding: 6px 10px;
+    /* Tighter padding */
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background-color: #333;
+    font-weight: bold;
+}
+
+/* Footnote Styling */
+.footnote-marker {
+    color: var(--accent-color);
+    font-size: 0.6em;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+.footnote-text {
+    font-size: 0.6em;
+    color: #95a5a6;
+    display: inline-block;
+    margin-top: 0.2em;
+    font-style: normal;
+}
