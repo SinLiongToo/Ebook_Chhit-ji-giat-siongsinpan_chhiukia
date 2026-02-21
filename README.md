@@ -22,6 +22,7 @@
 ## 更新記錄 (Changelog)
 
 ### Version 2.6 (2026-02-21)
+- **自訂網頁標籤名稱 (Custom Browser Tab Title)**: 修改了 Python 轉換腳本 (`convert_odt_to_html.py`) 與生成的 HTML，將瀏覽器上方的網頁標籤（Tab）顯示名稱更新為專屬標題「七字孽 - Tiān-chú-chheh - Chhit-jī-gia̍t」。
 - **支援罕用與深字盤羅馬字 (CJK Extension/Rare Characters Support)**: 針對擴展區段（包含 Ext-A 到 Ext-F，如「𬦰，𠕆，𡳞，𪁎」等台語相關特殊漢字），為了徹底解決在手機與行動裝置上系統字體缺字造成的亂碼與豆腐塊問題，引進了涵蓋面極廣的開源字型**花園明朝體 (HanaMin / jsDelivr CDN API)**。這項技術以無形中自動退避 (Fallback) 的方式掛載於字體層尾端，確保任何罕見用字皆可正確渲染且不會拖慢網頁載入速度。
 - **註腳 (Footnotes) 配置與優化**: 實作了 ODT 檔案中註腳的自動解析功能。註記編號顯示在對應文字的右上方，獨立的註解說明文字則自動附隨並排版在該段落（歌詞）的最尾端，同時採用稍微縮小的字體以便與主文做視覺區分，維持並排版面的整齊。
 
