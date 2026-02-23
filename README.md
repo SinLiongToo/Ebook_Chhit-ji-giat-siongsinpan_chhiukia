@@ -21,6 +21,10 @@
 
 ## 更新記錄 (Changelog)
 
+### Version 2.7 (2026-02-22)
+- **自訂字體支援 (Custom Font Support)**: 在 `docs/style.css` 中加入了自訂字體的預設載入區塊 (`@font-face`) 與宣告變數。並建立了 `docs/fonts/` 存放目錄。這允許使用者將自己準備的本機字體檔（例如 `.ttf` 或 `.otf`）直接放入該目錄中，並於 CSS 替換檔名，即可讓網頁全面套用自己的專屬字型，無須依賴外部網路 (CDN)。
+  - **設定芫荽 (Iansui) 字體為本機優先**: 已將使用者放置於 `docs/fonts/` 內的 `Iansui-Regular.ttf` 設定為網頁最高優先權的預設字體（`MyCustomFont`），提升字體載入穩定性與速度。
+
 ### Version 2.6 (2026-02-21)
 - **自訂網頁標籤名稱 (Custom Browser Tab Title)**: 修改了 Python 轉換腳本 (`convert_odt_to_html.py`) 與生成的 HTML，將瀏覽器上方的網頁標籤（Tab）顯示名稱更新為專屬標題「七字孽 - Tiān-chú-chheh - Chhit-jī-gia̍t」。
 - **支援罕用與深字盤羅馬字 (CJK Extension/Rare Characters Support)**: 針對擴展區段（包含 Ext-A 到 Ext-F，如「𬦰，𠕆，𡳞，𪁎」等台語相關特殊漢字），為了徹底解決在手機與行動裝置上系統字體缺字造成的亂碼與豆腐塊問題，引進了涵蓋面極廣的開源字型**花園明朝體 (HanaMin / jsDelivr CDN API)**。這項技術以無形中自動退避 (Fallback) 的方式掛載於字體層尾端，確保任何罕見用字皆可正確渲染且不會拖慢網頁載入速度。
